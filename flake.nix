@@ -58,43 +58,34 @@
       };
     })
     // {
-      nixosConfigurations = rec {
+      nixosConfigurations = let
+        mkSystem = config:
+          nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [ { users.users.root.password = ""; } config ];
+          };
+      in rec {
         machine = docker;
-        docker = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            {
-              virtualisation.oci-containers.containers.hello-world = {
-                image = "crccheck/hello-world";
-              };
-            }
-          ];
+        docker = mkSystem {
+          virtualisation.oci-containers.containers.hello-world = {
+            image = "crccheck/hello-world";
+          };
         };
-        hello-clj = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            {
-              systemd.services.hello-clj = {
-                enable = true;
-                serviceConfig = {
-                  ExecStart = "${self.packages.x86_64-linux.hello-clj}/bin/hello-clj";
-                };
-              };
-            }
-          ];
+        hello-clj = mkSystem {
+          systemd.services.hello-clj = {
+            enable = true;
+            serviceConfig = {
+              ExecStart = "${self.packages.x86_64-linux.hello-clj}/bin/hello-clj";
+            };
+          };
         };
-        hello-bb = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            {
-              systemd.services.hello-bb = {
-                enable = true;
-                serviceConfig = {
-                  ExecStart = "${self.packages.x86_64-linux.hello-bb}/bin/hello-bb";
-                };
-              };
-            }
-          ];
+        hello-bb = mkSystem {
+          systemd.services.hello-bb = {
+            enable = true;
+            serviceConfig = {
+              ExecStart = "${self.packages.x86_64-linux.hello-bb}/bin/hello-bb";
+            };
+          };
         };
       };
     };
