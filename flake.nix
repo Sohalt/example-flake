@@ -69,6 +69,7 @@
         docker = mkSystem {
           virtualisation.oci-containers.containers.hello-world = {
             image = "crccheck/hello-world";
+            ports = ["8000:8000"];
           };
         };
         hello-clj = mkSystem {
