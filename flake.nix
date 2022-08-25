@@ -62,7 +62,7 @@
         mkSystem = config:
           nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = [ { users.users.root.password = ""; } config ];
+            modules = [{users.users.root.password = "";} config];
           };
       in rec {
         machine = docker;
