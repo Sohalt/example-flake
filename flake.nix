@@ -71,6 +71,7 @@
             image = "crccheck/hello-world";
             ports = ["8000:8000"];
           };
+          systemd.services."podman-hello-world".after = ["network-online.target"];
         };
         hello-clj = mkSystem {
           systemd.services.hello-clj = {
