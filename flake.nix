@@ -84,6 +84,7 @@
         hello-clj = mkSystem {
           systemd.services.hello-clj = {
             enable = true;
+            wantedBy = [ "multi-user.target" ];
             serviceConfig = {
               ExecStart = "${self.packages.x86_64-linux.hello-clj}/bin/hello-clj";
             };
@@ -92,6 +93,7 @@
         hello-bb = mkSystem {
           systemd.services.hello-bb = {
             enable = true;
+            wantedBy = [ "multi-user.target" ];
             serviceConfig = {
               ExecStart = "${self.packages.x86_64-linux.hello-bb}/bin/hello-bb";
             };
