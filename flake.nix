@@ -72,6 +72,14 @@
             ports = ["8000:8000"];
           };
           systemd.services."podman-hello-world".after = ["network-online.target"];
+          services.openssh.enable = true;
+          users.users.root.openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK4o/ncaQUorp/BeZesPnVhzvfoqLJW3WZHtz+CWQvFU leahneukirchen"
+            "ssh-ed25520 AAAAC3NzaC1lZDI1NTE5AAAAIMGTXuhbXveoysJ5/MSs2gzOCklodyRJ2wZWwdOAwVtM Sohalt"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMIv1UwEJntvBa/gTYIbQPMkOujoergt1DNa8bulAmgm Sohalt"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINDrsavxeQzfkxRNvGwnnrJHQihHFDqQmXwryWcQ0pOH Sohalt"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL77PSaQffTINo5ezcZPzcg1/YZq4o30hw8KuMz/pWHm Sohalt"
+          ];
         };
         hello-clj = mkSystem {
           systemd.services.hello-clj = {
