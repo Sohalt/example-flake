@@ -3,7 +3,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     wbba = {
       url = "github:sohalt/write-babashka-application";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     clj-nix = {
       url = "github:jlesquembre/clj-nix";
